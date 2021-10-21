@@ -1,0 +1,77 @@
+body{
+  background-color: whitesmoke;
+  }
+header{
+  background-color: black;
+  color: white; 
+  font-family: 'Times New Roman', Times, serif 
+ 
+}
+hr{
+        height: 1px;
+        background-color: #ccc;
+        border: none;
+ }
+p{
+  background-color: gainsboro;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 17px;
+}
+nav{
+  background-color: bisque;
+  }
+a{
+    color: gray;
+  }
+#head3{
+    background-color: bisque;
+    border-radius: 5px;
+    font-size: 40px;
+  }
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+  }
+.submit{
+  background-color: rgb(247, 217, 234);
+}
+h2 {
+    color: black;
+  }
+
+  /* th[role=columnheader]:not(.no-sort) {
+	cursor: pointer;
+}
+
+th[role=columnheader]:not(.no-sort):after {
+	content: '';
+	float: right;
+	margin-top: 7px;
+	border-width: 0 4px 4px;
+	border-style: solid;
+	border-color: #404040 transparent;
+	visibility: hidden;
+	opacity: 0;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+th[aria-sort=ascending]:not(.no-sort):after {
+	border-bottom: none;
+	border-width: 4px 4px 0;
+}
+
+th[aria-sort]:not(.no-sort):after {
+	visibility: visible;
+	opacity: 0.4;
+}
+
+th[role=columnheader]:not(.no-sort):hover:after {
+	visibility: visible;
+	opacity: 1;
+}
+
+ */
