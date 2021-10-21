@@ -1,0 +1,4 @@
+MYSQL_DATABASE=database-1
+MYSQL_HOST=database-1.c2cv8npp9end.us-east-2.rds.amazonaws.com
+MYSQL_USER=msisadmin
+MYSQL_PASSWORD=samisstupid
