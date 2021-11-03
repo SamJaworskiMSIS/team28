@@ -1,1 +1,33 @@
-view/change referees table to come up here
+  <!-- AWS data table -->
+  <div id="SomeApp" class="container">
+    <table id="myTable" class="table">
+        <thead>
+          <tr>
+            <th scope="col">gameDate</th>
+            <th scope="col">gameField</th>
+          </tr>
+        </thead>
+        <tr v-for= "game in game">
+          <td>{{ game.gameDate }}</td>
+          <td>{{ game.gameField }}</td>
+        </tr>
+      </table>
+
+<h2 id="format1">ADD A REQUEST BELOW:</h2>
+<title>Add Game Below:</title>
+
+  <!-- Bootstrap form -->
+<form v-on:submit.prevent="postNewGame">
+  <div class="mb-3">
+    <label for="exampleInputtitle" class="form-label">Game Date</label>
+    <input type="date" v-model="gameForm.gameDate" class="form-control" id="exampleInputTitle">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputAuthor" class="form-label">Game field</label>
+    <input type="text" v-model="gameForm.gameField" class="form-control" id="exampleAuthor">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</div>

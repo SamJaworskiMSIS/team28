@@ -3,7 +3,7 @@ const SomeApp = {
       return {
         referees: [],
         selectedReferee: null,
-        games: [],
+        game: [],
         gameForm: {},
         selectedGame: null
       }
