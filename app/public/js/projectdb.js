@@ -3,7 +3,7 @@ const SomeApp = {
       return {
         referees: [],
         selectedReferee: null,
-        game: [],
+        games: [],
         gameForm: {},
         selectedGame: null
       }
@@ -144,4 +144,4 @@ const SomeApp = {
   
   }
   
-  Vue.createApp(SomeApp).mount('#gameApp');
+  Vue.createApp(SomeApp).mount('#GameApp');
