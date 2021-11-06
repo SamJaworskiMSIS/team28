@@ -1,68 +1,140 @@
+<!-- THIS IS FOR VIEWING PURPOSE BY THE USER -->
+<html>
 
-
-<!doctype html>
-
-<html lang='en'>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>viewGames</title>
+  <title>Books</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<!-- VueJs source -->
-<script src="https://unpkg.com/vue@next"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 </head>
 
-<!-- AWS data table -->
-<body> 
-  <div id="GameApp" class="container">
-    <table id="myTable" class="table">
+<body>
+  <div class="container-fluid">
+    <header class="row">
+      <h1> Games</h1>
+    </header>
+    <nav class="row navbar navbar-default">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target="#myMenu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+
+      <!-- <div class="collapse navbar-collapse" id="myMenu">
+        <ul class="nav navbar-nav">
+          <a href="index.html">User Information</a>&nbsp;
+          &nbsp&nbsp;<a href="books.html">Books</a>&nbsp;
+          &nbsp&nbsp;<a href="kelley.html">Kelley</a>
+          <!--<a href="specials.html">Specials</a> 
+        </ul>
+      </div> -->
+    </nav>
+
+    <h3 id="head3">GAMES TABLE</h3>
+    <hr>
+    <div id="GameApp" class="row">
+      <table id="myTable" class="table table-striped" border="2">
         <thead>
           <tr>
-            <th scope="col">Game Date</th>
-            <th scope="col">Game Field</th>
+
+            <th>Game ID</th>
+            <th>Game Date</th>
+            <th>Game Field</th>
           </tr>
         </thead>
-        <tr v-for= "game in games">
-          <td>{{ game.gameDate }}</td>
-          <td>{{ game.gameField }}</td>
-        </tr>
+        <tbody>
+          <tr v-for="game in games">
+            <td>{{ game.gameID }}</td>
+            <td>{{ game.gameDate }}</td>
+            <td>{{ game.gameField }}</td>
+            <td></td>
+            <!-- <td>
+              <button type="button" v-on:click="handleRefEdit(ref)"
+                class="btn btn-outline-secondary btn-sm">Edit</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm">Delete</button>
+
+            </td> -->
+          </tr>
+        </tbody>
       </table>
 
-<h2 id="format1">ADD A REQUEST BELOW:</h2>
-<title>Add Game Below:</title>
+      <br>
+      <br>
+      <br>
+      <br>
 
-  <!-- Bootstrap form -->
-<form v-on:submit.prevent="postNewGame">
-  <div class="mb-3">
-    <label for="exampleInputtitle" class="form-label">Game Date</label>
-    <input type="date" v-model="gameForm.gameDate" class="form-control" id="exampleInputTitle">
+      <!-- <h3 id="head3"> Form for Table </h3>
+      <hr> -->
+
+      <!-- This is table for only "View" Purpose by the user. Hence they should not be able to see the "Add/Edit/Delete" form.
+      It should only be visible for the Assigner. -->
+
+<!--       
+      <form v-on:submit.prevent="postNewBook">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title-debug</label>
+          <input type="text" v-model="bookForm.Title" class="form-control" id="title">
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+          <input type="text" v-model="bookForm.Author" class="form-control" id="author">
+        </div>
+        <div class="mb-3">
+          <label for="yearpub" class="form-label">Year_Published</label>
+          <input type="text" v-model="bookForm.Year_Published" class="form-control" id="yearpub">
+        </div>
+        <div class="mb-3">
+          <label for="publisher" class="form-label">Publisher</label>
+          <input type="text" v-model="bookForm.Publisher" class="form-control" id="publisher">
+        </div>
+        <div class="mb-3">
+          <label for="pagecount" class="form-label">Page_count</label>
+          <input type="number" v-model="bookForm.Page_Count" class="form-control" id="pagecount">
+        </div>
+        <div class="mb-3">
+          <label for="MSRP" class="form-label">MSRP</label>
+          <input type="number" v-model="bookForm.MSRP" class="form-control" id="MSRP">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+        <button type="submit" class="btn btn-primary">{{ selectedBook === null ? "Add " : "Edit " }} Offer</button>
+        <button type="button" class="btn btn-outline-secondary" 
+           v-if="selectedBook"
+           v-on:click="handleResetEdit">Cancel Edit</button>
+
+      </form> -->
+
+    </div>
+
+
   </div>
-  <div class="mb-3">
-    <label for="exampleInputAuthor" class="form-label">Game field</label>
-    <input type="text" v-model="gameForm.gameField" class="form-control" id="exampleAuthor">
-  </div>
-</div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
 
-
-  <!-- query sources -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-  <!-- connecting to js files -->
-<script src="js/projectdb.js"></script>
-<script src='js/tablesort.min.js'></script>
-
-
-<script>
+  <script src="js/tablesort.min.js"></script>
+  <script>
     new Tablesort(document.getElementById('myTable'));
-</script>
-
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+  <script src="js/main.js"></script>
 
 </body>
 
-</div>
+</html>
