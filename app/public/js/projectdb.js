@@ -53,6 +53,21 @@ const SomeApp = {
           console.error(error);
         });
     },
+    fetchAssignedData(s) {
+      console.log("Fetching Assigned data for ", s);
+      fetch('/api/assigned/')
+        .then(response => response.json())
+        .then((responseJson) => {
+          console.log(responseJson);
+          this.games = responseJson;
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     postGame(evt) {
       console.log("Test:", this.selectedGame);
       if (this.selectedGame) {
@@ -143,9 +158,11 @@ const SomeApp = {
     this.selectedReferee = ref;
     this.refForm = Object.assign({}, this.selectedReferee);
 },
-  created() {
-    this.fetchRefereeData();
-  }
+  created () {
+  this.fetchGameData(),
+  this.fetchRefereeData(),
+  this.fetchAssignedData()
+}
 
 }
 
