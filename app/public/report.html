@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Referee</title>
+  <title>Reports</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossoraigin="anonymous">
 
@@ -21,9 +21,22 @@
 </head>
 
 <body>
+  <nav>
+    <div class="w3-top">
+      <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+        <a href="#home" class="w3-bar-item w3-button">INDIANA STATE REFEREE ASSOCIATION</a>
+        <!-- Right-sided navbar links. Hide them on small screens -->
+        <div class="topnav-right">
+          <a href="index.html" class="w3-bar-item w3-button"><u>About</u></a>
+          <a href="user.html" class="w3-bar-item w3-button"><u>User</u></a>
+          <a href="assigner.html" class="w3-bar-item w3-button"><u>Assigner</u></a>
+        </div>
+      </div>
+    </div>
+  </nav>
   <div class="container-fluid">
     <header class="row">
-      <h1> Referees</h1>
+      <h1> ISA Report Page</h1>
     </header>
     <nav class="row navbar navbar-default">
       <div class="navbar-header">
@@ -45,23 +58,25 @@
       </div> -->
     </nav>
 
-    <h3 id="head3">REFEREE TABLE</h3>
+    <h3 id="head3">Current Assginments</h3>
     <hr>
     <div id="reportApp" class="row">
+      <p></p><a href="api/report/?format=csv">Download as CSV</a></p>
       <table id="myTable" class="table table-striped" border="2">
         <thead>
           <tr>
             <th>Name</th>
             <th>Game Date</th>
+            <th>Game Status</th>
             <th>Game Location</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="referee in referees">
-            <td>{{ referee.name}}</td>
-            <td>{{ referee.gameDate }}</td>
-            <td>{{ referee.status }}</td>
-            <td>{{ referee.gameField }}</td>
+          <tr v-for="g in report">
+            <td>{{ g.name}}</td>
+            <td>{{ g.gameDate }}</td>
+            <td>{{ g.status }}</td>
+            <td>{{ g.gameField }}</td>
 
             <!-- <td>
               <button type="button" v-on:click="handleRefEdit(ref)"
@@ -78,46 +93,6 @@
       <br>
       <br>
 
-      <!-- <h3 id="head3"> Form for Table </h3>
-      <hr> -->
-
-      <!-- This is table for only "View" Purpose by the user. Hence they should not be able to see the "Add/Edit/Delete" form.
-      It should only be visible for the Assigner. -->
-
-      <!--
-      <form v-on:submit.prevent="postNewBook">
-        <div class="mb-3">
-          <label for="title" class="form-label">Title-debug</label>
-          <input type="text" v-model="bookForm.Title" class="form-control" id="title">
-        </div>
-        <div class="mb-3">
-          <label for="author" class="form-label">Author</label>
-          <input type="text" v-model="bookForm.Author" class="form-control" id="author">
-        </div>
-        <div class="mb-3">
-          <label for="yearpub" class="form-label">Year_Published</label>
-          <input type="text" v-model="bookForm.Year_Published" class="form-control" id="yearpub">
-        </div>
-        <div class="mb-3">
-          <label for="publisher" class="form-label">Publisher</label>
-          <input type="text" v-model="bookForm.Publisher" class="form-control" id="publisher">
-        </div>
-        <div class="mb-3">
-          <label for="pagecount" class="form-label">Page_count</label>
-          <input type="number" v-model="bookForm.Page_Count" class="form-control" id="pagecount">
-        </div>
-        <div class="mb-3">
-          <label for="MSRP" class="form-label">MSRP</label>
-          <input type="number" v-model="bookForm.MSRP" class="form-control" id="MSRP">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-
-        <button type="submit" class="btn btn-primary">{{ selectedBook === null ? "Add " : "Edit " }} Offer</button>
-        <button type="button" class="btn btn-outline-secondary" 
-           v-if="selectedBook"
-           v-on:click="handleResetEdit">Cancel Edit</button>
-
-      </form> -->
 
     </div>
 

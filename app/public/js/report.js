@@ -1,7 +1,7 @@
 const SomeApp = {
   data() {
     return {
-      referee: []
+      report: []
     }
   },
   methods: {
@@ -9,12 +9,12 @@ const SomeApp = {
           const d = new Intl.NumberFormat("en-US").format(n);
           return "$ " + d;
       },
-      fetchRefereeData() {
+      fetchReportData() {
           fetch('/api/report/')
           .then( response => response.json() )
           .then( (responseJson) => {
               console.log(responseJson);
-              this.offers = responseJson;
+              this.report = responseJson;
           })
           .catch( (err) => {
               console.error(err);
@@ -22,7 +22,7 @@ const SomeApp = {
       }
   },
   created() {
-      this.fetchOfferData();
+      this.fetchReportData();
   }
 }
 
