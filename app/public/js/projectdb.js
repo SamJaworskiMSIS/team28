@@ -49,7 +49,7 @@ const SomeApp = {
         .then(response => response.json())
         .then((parsedJson) => {
           console.log(parsedJson);
-          this.books = parsedJson
+          this.assignments = parsedJson
         })
         .catch(err => {
           console.error(err)
