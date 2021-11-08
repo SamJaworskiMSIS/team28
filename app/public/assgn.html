@@ -85,6 +85,18 @@
       <hr>
       <form v-on:submit.prevent="postAssignment">
         <div class="mb-3">
+          <label for="refID" class="form-label">Select Ref Name</label>
+          <select class="form-control" v-model="selectedRefID">
+            <option v-for="ref in referees" :value="ref.refID" :key="ref.refID">{{ ref.name }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="gameID" class="form-label">Select Game</label>
+          <select class="form-control" v-model="selectedGameID">
+            <option v-for="game in games" :value="game.gameID">{{ game.gameDate }} {{ game.gameField }}</option>
+          </select>
+        </div>
+        <!-- <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" v-model="assForm.name" class="form-control" id="name">
         </div>
@@ -95,10 +107,15 @@
         <div class="mb-3">
           <label for="gameField" class="form-label">Game Field</label>
           <input type="text" v-model="assForm.gameField" class="form-control" id="gameField">
-        </div>
+        </div> -->
         <div class="mb-3">
           <label for="status" class="form-label">Status</label>
-          <input type="text" v-model="assForm.status" class="form-control" id="status">
+          <select v-model="assForm.status" class="form-select" id="status">
+            <option value = "declined">Declined</option>
+            <option value = "accepted">Accepted</option>
+            <option value = "notified">Notified</option>
+          </select>
+          <!-- <input type="text" v-model="assForm.status" class="form-control" id="status"> -->
         </div>
         <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 

@@ -33,14 +33,15 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'INSERT INTO assigned (refID, gameID, status)
-  VALUES (?, ?, ?)'
+  'INSERT INTO assigned (name, status, gameDate, gameField)
+  VALUES (?, ?, ?, ?)'
 );
 //id, Title, Author, Year_Published,Publisher,Page_Count, MSRP
 $stmt->execute([
-    $_POST['refID'],
-    $_POST['gameID'],
-    $_POST['status']
+    $_POST['name'],
+    $_POST['status'],
+    $_POST['gameDate'],
+    $_POST['gameField']
 ]);
 
 // Get auto-generated PK from DB

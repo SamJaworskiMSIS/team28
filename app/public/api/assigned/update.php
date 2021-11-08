@@ -40,7 +40,7 @@ $stmt = $db->prepare(
 $stmt->execute([ 
   $_POST['refID'],
   $_POST['gameID'],
-  $_POST['gamideID']
+  $_POST['id']
 ]);
 
 // Get auto-generated PK from DB

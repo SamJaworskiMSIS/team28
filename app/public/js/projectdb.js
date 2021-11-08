@@ -9,7 +9,9 @@ const SomeApp = {
       gameForm: {},
       assForm: {},
       refForm: {},
-      selectedGame: null
+      selectedGame: null,
+      selectedRefID: null,
+      selectedGameID: null
     }
   },
   computed: {},
@@ -75,6 +77,7 @@ const SomeApp = {
           console.log("Returned from post:", json);
           // TODO: test a result was returned!
           this.games = json;
+          this.fetchAssignedData();
 
           // reset the form
           this.gameForm = {};
@@ -149,6 +152,7 @@ const SomeApp = {
           console.log("Returned from post:", json);
           // TODO: test a result was returned!
           this.referees = json;
+          this.fetchAssignedData();
 
           // reset the form
           this.refForm = {};
@@ -203,6 +207,8 @@ const SomeApp = {
         });
     },
     postAssignment(evt) {
+      console.log('asa', this.selectedRefID);
+      console.log('gameId', this.selectedGameID);
       console.log("Test:", this.selectedAssigned);
       if (this.selectedAssigned) {
         this.postEditAssignment(evt);
@@ -248,11 +254,13 @@ const SomeApp = {
         });
     },
     deleteAssigned(o) {
+
+      console.log("Delete assigned!", o);
+
       if (!confirm("Are you sure you want to delete the assignment? ")) {
         return;
       }
 
-      console.log("Delete!", o);
 
       fetch('api/assigned/delete.php', {
         method: 'POST',
@@ -273,6 +281,7 @@ const SomeApp = {
         });
     },
     editAssigned(ass) {
+      console.log('edit assign', ass),
       this.selectedAssigned = ass;
       this.assForm = Object.assign({}, this.selectedAssigned);
     },
