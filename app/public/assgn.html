@@ -54,19 +54,18 @@
       <table id="myTable" class="table table-striped" border="2">
         <thead>
           <tr>
-            <th>Referee ID</th>
-            <th>Game ID</th>
-            <!-- <th>Game Field</th> -->
+            <th>Referee Name</th>
             <th>Status</th>
+            <th>Game Date</th>
+            <th>Game Field</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="ass in assignments">
-            <td>{{ ass.refID }}</td>
-            <td>{{ ass.gameID }}</td>
-            <!-- <td>{{ ass.gameField }}</td> -->
+            <td>{{ ass.name }}</td>
             <td>{{ ass.status }}</td>
-            <td></td>
+            <td>{{ ass.gameDate }}</td>
+            <td>{{ ass.gameField }}</td>
             <td>
               <button type="button" v-on:click="editAssigned(ass)"
                 class="btn btn-outline-secondary btn-sm">Edit</button>
@@ -90,8 +89,8 @@
           <input type="text" v-model="assForm.name" class="form-control" id="name">
         </div>
         <div class="mb-3">
-          <label for="gameID" class="form-label">Game ID</label>
-          <input type="text" v-model="assForm.gameID" class="form-control" id="gameID">
+          <label for="gameDate" class="form-label">Game Date</label>
+          <input type="date" v-model="assForm.gameDate" class="form-control" id="gameDate">
         </div>
         <div class="mb-3">
           <label for="gameField" class="form-label">Game Field</label>
