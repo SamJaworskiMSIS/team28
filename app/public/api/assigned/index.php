@@ -6,7 +6,8 @@ require 'class/DbConnection.php';
 $db = DbConnection::getConnection();
 
 // Step 2: Create & run the query
-$sql = 'SELECT * FROM assigned';
+$sql = 'SELECT r.name, a.status, g.gameDate,g.gameField
+FROM referee r, assigned a, game g WHERE r.refID = a. refID AND a.gameID = g.gameID';
 $vars = [];
 
 // if (isset($_GET['guid'])) {

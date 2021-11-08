@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Books</title>
+  <title>Referees</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
@@ -33,16 +33,6 @@
           <span class="icon-bar"></span>
         </button>
       </div>
-
-
-      <!-- <div class="collapse navbar-collapse" id="myMenu">
-        <ul class="nav navbar-nav">
-          <a href="index.html">User Information</a>&nbsp;
-          &nbsp&nbsp;<a href="books.html">Books</a>&nbsp;
-          &nbsp&nbsp;<a href="kelley.html">Kelley</a>
-          <!--<a href="specials.html">Specials</a> 
-        </ul>
-      </div> -->
     </nav>
 
     <h3 id="head3">REFEREE TABLE</h3>
@@ -60,17 +50,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="referee in referees">
-            <td>{{ referee.refID }}</td>
-            <td>{{ referee.name }}</td>
-            <td>{{ referee.dob }}</td>
-            <td>{{ referee.refereeSkill }}</td>
-            <td>{{ referee.refereeGrade }}</td>
+          <tr v-for="ref in referees">
+            <td>{{ ref.refID }}</td>
+            <td>{{ ref.name }}</td>
+            <td>{{ ref.dob }}</td>
+            <td>{{ ref.refereeSkill }}</td>
+            <td>{{ ref.refereeGrade }}</td>
             <td></td>
             <td>
-              <button type="button" v-on:click="handleRefEdit(ref)"
+              <button type="button" v-on:click="editReferee(ref)"
                 class="btn btn-outline-secondary btn-sm">Edit</button>
-              <button type="button" class="btn btn-outline-secondary btn-sm">Delete</button>
+              <button type="button" v-on:click="deleteReferee(ref)" class="btn btn-outline-secondary btn-sm">Delete</button>
 
             </td> 
           </tr>
@@ -84,44 +74,31 @@
 
      <h3 id="head3"> Form for Table </h3>
       <hr>
+      <form v-on:submit.prevent="postReferee">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" v-model="refForm.name" class="form-control" id="name">
+        </div>
+        <div class="mb-3">
+          <label for="dob" class="form-label">Date of Birth</label>
+          <input type="date" v-model="refForm.dob" class="form-control" id="dob">
+        </div>
+        <div class="mb-3">
+          <label for="refereeSkill" class="form-label">Referee Skill</label>
+          <input type="text" v-model="refForm.refereeSkill" class="form-control" id="refereeSkill">
+        </div>
+        <div class="mb-3">
+          <label for="refereeGrade" class="form-label">Referee Grade</label>
+          <input type="text" v-model="refForm.refereeGrade" class="form-control" id="refereeGrade">
+        </div>
+        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 
-      <!-- This is table for only "View" Purpose by the user. Hence they should not be able to see the "Add/Edit/Delete" form.
-      It should only be visible for the Assigner. -->
-
-<!--       
-      <form v-on:submit.prevent="postNewBook">
-        <div class="mb-3">
-          <label for="title" class="form-label">Title-debug</label>
-          <input type="text" v-model="bookForm.Title" class="form-control" id="title">
-        </div>
-        <div class="mb-3">
-          <label for="author" class="form-label">Author</label>
-          <input type="text" v-model="bookForm.Author" class="form-control" id="author">
-        </div>
-        <div class="mb-3">
-          <label for="yearpub" class="form-label">Year_Published</label>
-          <input type="text" v-model="bookForm.Year_Published" class="form-control" id="yearpub">
-        </div>
-        <div class="mb-3">
-          <label for="publisher" class="form-label">Publisher</label>
-          <input type="text" v-model="bookForm.Publisher" class="form-control" id="publisher">
-        </div>
-        <div class="mb-3">
-          <label for="pagecount" class="form-label">Page_count</label>
-          <input type="number" v-model="bookForm.Page_Count" class="form-control" id="pagecount">
-        </div>
-        <div class="mb-3">
-          <label for="MSRP" class="form-label">MSRP</label>
-          <input type="number" v-model="bookForm.MSRP" class="form-control" id="MSRP">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-
-        <button type="submit" class="btn btn-primary">{{ selectedBook === null ? "Add " : "Edit " }} Offer</button>
+        <button type="submit" class="btn btn-primary">{{ selectedReferee === null ? "Add " : "Edit " }} Referee</button>
         <button type="button" class="btn btn-outline-secondary" 
-           v-if="selectedBook"
-           v-on:click="handleResetEdit">Cancel Edit</button>
+           v-if="selectedReferee"
+           v-on:click="cancelEditClick">Cancel Edit</button>
 
-      </form> -->
+      </form> 
 
     </div>
 
@@ -137,42 +114,8 @@
     integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
     crossorigin="anonymous"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/projectdb.js"></script>
 
 </body>
 
 </html>
-
-  <!-- AWS data table
-  <div id="SomeApp" class="container">
-    <table id="myTable" class="table">
-        <thead>
-          <tr>
-            <th scope="col">gameDate</th>
-            <th scope="col">gameField</th>
-          </tr>
-        </thead>
-        <tr v-for= "game in games">
-          <td>{{ game.gameDate }}</td>
-          <td>{{ game.gameField }}</td>
-        </tr>
-      </table>
-
-<h2 id="format1">ADD A REQUEST BELOW:</h2>
-<title>Add Game Below:</title>
-
-  <!-- Bootstrap form -->
-<!-- <form v-on:submit.prevent="postNewGame">
-  <div class="mb-3">
-    <label for="exampleInputtitle" class="form-label">Game Date</label>
-    <input type="date" v-model="gameForm.gameDate" class="form-control" id="exampleInputTitle">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputAuthor" class="form-label">Game field</label>
-    <input type="text" v-model="gameForm.gameField" class="form-control" id="exampleAuthor">
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-</div> --> -->

@@ -29,12 +29,17 @@ require("class/DbConnection.php");
 $db = DbConnection::getConnection();
 
 // Step 2: Create & run the query
-// Note the use of parameterized statements to avoid injection
+// Note the use of parameterized statements to avoid injection. Books (Title, Author, Year_Published, Publisher, Page_Count, MSRP)
 $stmt = $db->prepare(
-  'DELETE FROM game WHERE gameID = ?'
+  'UPDATE game SET 
+    gameDate = ?,
+    gameField = ?
+  WHERE gameID = ?'
 );
 
-$stmt->execute([
+$stmt->execute([ 
+  $_POST['gameDate'],
+  $_POST['gameField'],
   $_POST['gameID']
 ]);
 

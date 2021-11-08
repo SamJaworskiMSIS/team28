@@ -31,11 +31,11 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'DELETE FROM referee WHERE id = ?'
+  'DELETE FROM referee WHERE refID = ?'
 );
 
 $stmt->execute([
-  $_POST['id']
+  $_POST['refID']
 ]);
 
 // Get auto-generated PK from DB

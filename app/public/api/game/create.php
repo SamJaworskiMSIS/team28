@@ -37,7 +37,7 @@ $stmt = $db->prepare(
 
 $stmt->execute([
   $_POST['gameDate'],
-  $_POST['gameField'],
+  $_POST['gameField']
 ]);
 
 // Get auto-generated PK from DB

@@ -1,12 +1,4 @@
-
-   
 <?php
-
-// if (($_SERVER['REQUEST_METHOD'] ?? '') != 'POST') {
-//     header($_SERVER["SERVER_PROTOCOL"] . " 405 Method Not Allowed");
-//     exit;
-// }
-
 try {
     $_POST = json_decode(
                 file_get_contents('php://input'), 
@@ -33,12 +25,11 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'INSERT INTO referee (refID, name, dob, refereeSkill, refereeGrade)
-  VALUES (?, ?, ?, ?, ?)'
+  'INSERT INTO referee ( name, dob, refereeSkill, refereeGrade)
+  VALUES (?, ?, ?, ?)'
 );
 //id, Title, Author, Year_Published,Publisher,Page_Count, MSRP
 $stmt->execute([
-    $_POST['refID'],
     $_POST['name'],
     $_POST['dob'],
     $_POST['refereeSkill'],

@@ -33,12 +33,11 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'INSERT INTO assigned (id, refID, gameID, status)
-  VALUES (?, ?, ?, ?)'
+  'INSERT INTO assigned (refID, gameID, status)
+  VALUES (?, ?, ?)'
 );
 //id, Title, Author, Year_Published,Publisher,Page_Count, MSRP
 $stmt->execute([
-    $_POST['id'],
     $_POST['refID'],
     $_POST['gameID'],
     $_POST['status']
