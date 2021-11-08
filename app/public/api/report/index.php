@@ -15,6 +15,16 @@ $sql = 'SELECT
 from referee, game, assigned;';
 $vars = [];
 
+if (isset($_GET['referee'])) {
+    // This is an example of a parameterized query
+    $sql = 'SELECT * FROM referee WHERE refId = ?';
+  
+    //NOT THIS WAY
+    // $sql = 'SELECT * FROM offer WHERE studentId = ' . $_GET['student'];
+  
+    $vars = [ $_GET['referee'] ];
+  }
+
 $stmt = $db->prepare($sql);
 $stmt->execute($vars);
 

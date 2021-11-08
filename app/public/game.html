@@ -29,6 +29,7 @@
         <div class="topnav-right">
           <a href="index.html" class="w3-bar-item w3-button"><u>About</u></a>
           <a href="user.html" class="w3-bar-item w3-button"><u>User</u></a>
+          <a href="report.html" class="w3-bar-item w3-button"><u>Reports</u></a>
           <a href="assigner.html" class="w3-bar-item w3-button"><u>Assigner</u></a>
         </div>
       </div>
@@ -79,6 +80,34 @@
       <br>
       <br>
 
+      <h4 id="head3">Unassigned Games</h4>
+      <hr>
+      <div id="gamereportApp" class="row">
+        <p></p><a href="api/gamereport/?format=csv">Download as CSV</a></p>
+        <table id="myTable" class="table table-striped" border="2">
+          <thead>
+            <tr>
+              <th>Game Date</th>
+              <th>Game Location</th>
+              <th>Game Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="g in gamestatus">
+              <td>{{ g.gameDate }}</td>
+              <td>{{ g.gameField }}</td>
+              <td>{{ g.status }}</td>
+  
+              <!-- <td>
+                <button type="button" v-on:click="handleRefEdit(ref)"
+                  class="btn btn-outline-secondary btn-sm">Edit</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm">Delete</button>
+  
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+
      <h3 id="head3"> Form for Table </h3>
       <hr>
       <form v-on:submit.prevent="postGame">
@@ -99,6 +128,8 @@
 
       </form> 
 
+
+
     </div>
 
 
@@ -114,6 +145,7 @@
     crossorigin="anonymous"></script>
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="js/projectdb.js"></script>
+  <script src="js/gamereport.js"></script>
 
 </body>
 
