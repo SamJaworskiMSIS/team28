@@ -10,7 +10,7 @@ const SomeApp = {
           return "$ " + d;
       },
       fetchReportData() {
-          fetch('/api/report/')
+          fetch('/api/gamereport/')
           .then( response => response.json() )
           .then( (responseJson) => {
               console.log(responseJson);
@@ -20,18 +20,10 @@ const SomeApp = {
               console.error(err);
           })
       }
-    //   selectReferee(s) {
-    //     if (s == this.selectedReferee) {
-    //         return;
-    //     }
-    //     this.selectedReferee = s;
-    //     this.report = [];
-    //     this.fetchReportData(this.selectedReferee);
-    // },
   },
   created() {
       this.fetchReportData();
   }
 }
 
-Vue.createApp(SomeApp).mount('#reportApp');
+Vue.createApp(SomeApp).mount('#gamereportApp');

@@ -1,6 +1,4 @@
 <?php
-  
-// require 'common.php';
 require 'class/DbConnection.php';
 
 // Step 1: Get a datase connection from our helper class
@@ -8,35 +6,58 @@ $db = DbConnection::getConnection();
 
 // Step 2: Create & run the query
 $sql = 'SELECT 
-    name, 
-    gameDate, 
-    gameField, 
-    status
-from referee, game, assigned;';
+  gameDate,
+  gameField,
+  status
+  FROM assigned 
+  INNER JOIN game ON assigned.gameID = game.gameID
+Where
+assigned.status = "Declined"
+AND
+game.gameDate <= (SELECT CURDATE() as today FROM DUAL)';
 $vars = [];
+
+if (isset($_GET['Referee'])) {
+  // This is an example of a parameterized query
+  $sql = 'SELECT 
+  gameDate,
+  gameField,
+  status
+  FROM assigned 
+  INNER JOIN game ON assigned.gameID = game.gameID
+Where
+assigned.status = "Declined"
+AND
+game.gameDate <= (SELECT CURDATE() as today FROM DUAL)';
+
+  //NOT THIS WAY
+  // $sql = 'SELECT * FROM offer WHERE studentId = ' . $_GET['student'];
+
+  $vars = [ $_GET['Referee'] ];
+}
 
 $stmt = $db->prepare($sql);
 $stmt->execute($vars);
 
-$report = $stmt->fetchAll();
+$gamestatus = $stmt->fetchAll();
+
 
 if (isset($_GET['format']) && $_GET['format']=='csv') {
-    header('Content-Type: text/csv');
-    echo "Referee Name, Game Date, Status,Location\r\n";
-  
-    foreach($report as $o) {
-      echo "\"".$o['name'] . "\","
-          .$o['gameDate'] . ","
-          .$o['status'] . ","
-          .$o['gameField'] . "\r\n";
-    }
-  
-  } else {
-    // Step 3: Convert to JSON
-    $json = json_encode($report, JSON_PRETTY_PRINT);
-  
-    // Step 4: Output
-    header('Content-Type: application/json');
-    echo $json;
-  }
-  ?>
+header('Content-Type: text/csv');
+echo "gameDate,location,status\r\n";
+
+foreach($gamestatus as $a) {
+  echo "\"".$a['gameDate'] . "\","
+      .$a['gameField'] . ","
+      .$a['status'] . "\r\n";
+}
+
+} else {
+// Step 3: Convert to JSON
+$json = json_encode($gamestatus, JSON_PRETTY_PRINT);
+
+// Step 4: Output
+header('Content-Type: application/json');
+echo $json;
+}
+?>

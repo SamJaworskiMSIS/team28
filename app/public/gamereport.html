@@ -35,7 +35,7 @@
       </div>
     </div>
   </nav>
-  <div class="container-fluid" v-if="selectedReferee">
+  <div class="container-fluid">
     <header class="row">
       <h1> ISA Report Page</h1>
     </header>
@@ -54,41 +54,28 @@
           <a href="index.html">User Information</a>&nbsp;
           &nbsp&nbsp;<a href="books.html">Books</a>&nbsp;
           &nbsp&nbsp;<a href="kelley.html">Kelley</a>
-          <a href="specials.html">Specials</a> 
+          <!--<a href="specials.html">Specials</a> 
         </ul>
       </div> -->
     </nav>
 
-    <h3 id="head3">Current Assignments</h3>
+    <h3 id="head3">Unassigned Games</h3>
     <hr>
-
-    <div id="reportApp" class="row">
-      <!-- <form v-on:submit:prevent="listrefereeegames"></form>
-        <label for="referee_report"> Select Desired Refereee:&nbsp;&nbsp;</label>
-        <select required v-model = "reportForm.refID">
-          <option v-for = "r in referee" :value = "r.refID" required>{{r.refID}} - {{r.name}}</option>
-        </select>
-        <button id="assignment-table" class = "table table striped table-hover"></button> -->
-
-
-
-        <!-- </form>" -->
-      <p></p><a href="api/report/?format=csv">Download as CSV</a></p>
+    <div id="gamereportApp" class="row">
+      <p></p><a href="api/gamereport/?format=csv">Download as CSV</a></p>
       <table id="myTable" class="table table-striped" border="2">
         <thead>
           <tr>
-            <th>Name</th>
             <th>Game Date</th>
-            <th>Game Status</th>
             <th>Game Location</th>
+            <th>Game Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="g in report">
-            <td>{{ g.name}}</td>
+          <tr v-for="g in gamestatus">
             <td>{{ g.gameDate }}</td>
-            <td>{{ g.status }}</td>
             <td>{{ g.gameField }}</td>
+            <td>{{ g.status }}</td>
 
             <!-- <td>
               <button type="button" v-on:click="handleRefEdit(ref)"
@@ -99,6 +86,10 @@
           </tr>
         </tbody>
       </table>
+
+      <!-- <div class="NoGames" v-if="! gamestatus.length"> == $0
+        <h3> No Games Declined</h3>
+      </div> -->
 
       <br>
       <br>
@@ -121,7 +112,7 @@
     crossorigin="anonymous">
   </script>
   <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-  <script src="js/report.js"></script>
+  <script src="js/gamereport.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
